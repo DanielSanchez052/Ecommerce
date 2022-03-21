@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Contactenos {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <form role="form" method="post">
+                
+                <div class="card-header">
+                  <h5 class="title"></h5>
+
+                  <h6 class="card-category">
+                      Contactenos
+                  </h6>
+                </div>
+
+                <div class="card-body">
+                  {% csrf_token %} 
+                  
+                  {{ form|crispy}}
+                    
+                </div>
+                <div class="card-footer text-right">
+                  <button type="submit" name="send" class="btn btn-fill btn-primary">Enviar</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+      </div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+      <script>
+        {% if messages %}
+              {% for message in messages %}
+                message = {{message|safe}}
+                core.showNotification(message.message, color=message.type)
+              {% endfor %}
+          {% endif %}
+      </script>
+{% endblock javascripts %}

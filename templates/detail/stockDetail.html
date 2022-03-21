@@ -1,0 +1,83 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Stock {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+
+              {% if action == 'detail' %}
+                <form method="POST" id="modalForm" action="{% url 'products:stockUpdate' object.id%}">
+              {% elif action == 'create' %}
+                <form method="POST" id="modalForm" action="{% url 'products:stockCreate'%}">
+              {% endif %}  
+              
+                <div class="card-header">
+                  {% if action == 'detail' %}
+                    <h5 class="modal-title text-secondary h4" id="titleProductModal">Detalle: {{object.description}}</h5>
+                  {% elif action == 'create' %}
+                    <h5 class="modal-title text-secondary h4" id="titleProductModal">Modificar Stock/inventario</h5>
+                  {% endif %}
+                </div>
+                <div class="card-body">
+                  {% csrf_token %}
+                  <div class="mb-3 form-group">
+                    {{ form.product | as_crispy_field }} 
+                  </div> 
+                  <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">
+                      {{ form.available | as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                      {{ form.inventory | as_crispy_field }}
+                    </div>
+                  </div>
+                  <div class="mb-3 form-group">
+                    {{ form.is_active | as_crispy_field }}
+                  </div>
+                </div>
+                <div class="card-footer">
+                  {% if action == 'detail' %}
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteStock">Eliminar</button>
+                    <a class="btn btn-secondary" href="{% url 'products:stock' %}">Atras</a>
+                    <button type="submit" class="btn btn-primary" id='modalUpdatebtn'>Actualizar</button>
+                  {% elif action == 'create' %}
+                    <button type="submit" class="btn btn-success">Crear</button>
+                    <a class="btn btn-secondary" href="{% url 'products:stock' %}">Atras</a>
+                  {% endif %}
+                  
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+
+
+{% endblock content %}
+
+{% block modals %}
+{% if action == 'detail' %}
+  <div class="modal fade" id="confirmDeleteStock"  tabindex="-1" role="dialog" aria-labelledby="stockDetailTitle" aria-hidden="true">
+    {% include 'modal/confirmDelete.html'%}
+  </div> 
+
+  {% endif %}
+{% endblock modals %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+      <script>
+        {% if messages %}
+              {% for message in messages %}
+                message = {{message|safe}}
+                core.showNotification(message.message, color=message.type)
+              {% endfor %}
+          {% endif %}
+      </script>
+{% endblock javascripts %}

@@ -1,0 +1,38 @@
+{% load crispy_forms_tags %}
+
+<div class="modal-dialog modal-xl " role="document">
+    <div class="modal-content" style="background: linear-gradient(#1e1e2f, #1e1e24);">
+        <div class="modal-header">
+            {% if action == 'detail' %}
+                <h5 class="modal-title text-secondary h4" id="titleProductModal">Detalle: {{object.description}}</h5>
+            {% elif action == 'create' %}
+                <h5 class="modal-title text-secondary h4" id="titleProductModal">Crear Categoria</h5>
+            {% endif %}
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% if action == 'detail' %}
+            <form method="POST" id="modalForm" action="{% url 'products:categoryUpdate' object.id%}">
+        {% elif action == 'create' %}
+            <form method="POST" id="modalForm" action="{% url 'products:categoryCreate'%}">
+        {% endif %}    
+            <div class="modal-body">
+                <div class="container-fluid">
+                    {% csrf_token %} 
+                    {{form|crispy}}
+                </div>    
+            </div>
+            <div class="modal-footer">
+                {% if action == 'detail' %}
+                    <button type="button" class="btn btn-danger" onclick="core.showModal('{% url 'products:categoryDelete' object.id%}','#confirmDeleteCategory');">Eliminar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id='modalUpdatebtn'>Actualizar</button>
+                {% elif action == 'create' %}
+                    <button type="submit" class="btn btn-success">Crear</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>

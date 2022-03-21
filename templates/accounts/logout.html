@@ -1,0 +1,39 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %
+
+{% block title %} Login {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+
+              <form role="form" method="post" action="">
+              
+                {% csrf_token %} 
+
+                <div class="card-header">
+                  <h5 class="title">Logout</h5>
+
+                  <h6 class="card-category">Gracias por visitarnos!!</h6>
+                </div>
+
+                <div class="card-body">
+                  
+                </div>    
+                <div class="card-footer">
+                  Have an account? <a href="{% url 'users:login' %}" class="text-primary">Login</a>
+                </div>
+            </div>
+          </div>
+      </div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

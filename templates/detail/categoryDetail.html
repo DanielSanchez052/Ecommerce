@@ -1,0 +1,72 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Categorias {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+
+              {% if action == 'detail' %}
+                <form method="POST" id="modalForm" action="{% url 'products:categoryUpdate' object.id%}">
+              {% elif action == 'create' %}
+                <form method="POST" id="modalForm" action="{% url 'products:categoryCreate'%}">
+              {% endif %}  
+              
+                <div class="card-header">
+                  {% if action == 'detail' %}
+                    <h5 class="modal-title text-secondary h4" id="titleProductModal">Detalle: {{object.description}}</h5>
+                  {% elif action == 'create' %}
+                    <h5 class="modal-title text-secondary h4" id="titleProductModal">Crear Categoria</h5>
+                  {% endif %}
+                </div>
+                <div class="card-body">
+
+                  {% csrf_token %} 
+                  {{form|crispy}}
+
+                </div>
+                <div class="card-footer">
+                  {% if action == 'detail' %}
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteCategory">Eliminar</button>
+                    <a class="btn btn-secondary" href="{% url 'products:categories' %}">Atras</a>
+                    <button type="submit" class="btn btn-primary" id='modalUpdatebtn'>Actualizar</button>
+                  {% elif action == 'create' %}
+                    <button type="submit" class="btn btn-success">Crear</button>
+                    <a class="btn btn-secondary" href="{% url 'products:categories' %}">Atras</a>
+                  {% endif %}
+                  
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+
+
+{% endblock content %}
+
+{% block modals %}
+{% if action == 'detail' %}
+  <div class="modal fade" id="confirmDeleteCategory"  tabindex="-1" role="dialog" aria-labelledby="categoryDetailTitle" aria-hidden="true">
+    {% include 'modal/confirmDelete.html'%}
+  </div> 
+
+  {% endif %}
+{% endblock modals %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+      <script>
+        {% if messages %}
+              {% for message in messages %}
+                message = {{message|safe}}
+                core.showNotification(message.message, color=message.type)
+              {% endfor %}
+          {% endif %}
+      </script>
+{% endblock javascripts %}

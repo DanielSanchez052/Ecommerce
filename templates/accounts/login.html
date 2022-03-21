@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %
+
+{% block title %} Login {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+
+              <form role="form" method="post" action="">
+              
+                {% csrf_token %} 
+
+                <div class="card-header">
+                  <h5 class="title">Login</h5>
+
+                  <h6 class="card-category">
+                      {% if msg %}
+                        <span class="text-danger">{{ msg }}</span>
+                      {% else %}
+                        Add your credentials
+                      {% endif %}  
+                  </h6>
+                </div>
+
+                <div class="card-body">
+                    {{form}}
+                </div>    
+                <div class="card-footer">
+                  <button type="submit" name="login" class="btn btn-fill btn-primary">Login</button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+      </div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

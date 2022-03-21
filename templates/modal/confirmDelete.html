@@ -1,0 +1,22 @@
+<div class="modal-dialog modal-xl " role="document">
+    <div class="modal-content" style="background: linear-gradient(#1e1e2f, #1e1e24);">
+        <div class="modal-header">
+                <h5 class="modal-title text-secondary h4" id="titleProductModal">Eliminar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form method="POST" id="productForm" action="{{urlDelete}}">
+            <div class="modal-body">
+                <div class="container-fluid">
+                <h5 class="h2"> Desea eliminar: {{object}}</h5>
+                    {% csrf_token %} 
+                </div>    
+            </div>
+            <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+    </div>
+</div>
