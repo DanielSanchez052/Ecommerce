@@ -8,7 +8,6 @@ from django.contrib import messages
 from apps.products.models import Products,ProductDigital
 from apps.products.models import Stock
 from apps.core.mixins import auth
-from apps.core.tasks import taskLog
 
 
 class HomeView(auth.RequireLoginMixin,generic.TemplateView):

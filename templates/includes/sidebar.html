@@ -65,23 +65,20 @@
               <p>Usuarios</p>
             </a>
           </li>
-          {#% else %#}
-          <!--
-          <li class="active">
-            <a target="_blank" 
-               href="https://appseed.us/admin-dashboards/django-dashboard-black-pro">
-              <i class="tim-icons icon-spaceship"></i>
-              <p>PRO Version</p>
+          {% else %}
+          <li class="">
+            <a href="{% url 'users:login' %}">
+              <i class="tim-icons icon-single-02"></i>
+              <p>Login</p>
             </a>
-          </li>   
-          -->
-          {% endif %}
+          </li> 
+          {% endif %}  
           <li class="">
             <a href="{% url 'core:contact' %}">
               <i class="tim-icons icon-send"></i>
               <p>Contactenos</p>
             </a>
-          </li>                 
+          </li>                  
         </ul>
         
       </div>
