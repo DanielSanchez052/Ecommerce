@@ -30,8 +30,7 @@ services:
       - web_network
     depends_on:
       - db
-      - redis
-    
+      - redis  
   celery:
     build: .
     command: celery -A Ecommerce worker --loglevel=info
@@ -44,7 +43,6 @@ services:
       - web 
       - db
       - redis
-    
   nginx:
     container_name: nginx
     restart: always

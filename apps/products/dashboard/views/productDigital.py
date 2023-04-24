@@ -10,20 +10,6 @@ from apps.core.mixins import auth
 
 # Create your views here.
 
-class ProductDigitalView(auth.RequireLoginMixin,SingleTableView):
-    table_class = ProductDigitalTable
-    queryset = ProductDigital.objects.all()
-    template_name = 'home/products/productDigital.html'
-
-
-class ProductDigitalCreate(auth.RequireLoginMixin,MessageValidMixin, generic.CreateView):
-    model = ProductDigital
-    form_class = ProductDigitalForm
-    template_name = 'detail/productDigitalDetail.html'
-    success_url = reverse_lazy("products:productDigital")
-    extra_context = { 'action': 'create' }
-
-
 class ProductDigitalUpdate(auth.RequireLoginMixin,MessageValidMixin,generic.UpdateView):
     model=ProductDigital
     template_name='detail/productDigitalDetail.html'
@@ -44,20 +30,6 @@ class ProductDigitalUpdate(auth.RequireLoginMixin,MessageValidMixin,generic.Upda
                 self.invalid_message = "El codigo ya ha sido utilizado por lo tanto no se puede actualizar"
             return self.form_invalid(form)
         
-class DigitalDetailView(auth.RequireLoginMixin,generic.DetailView):
-    template_name='detail/productDigitalDetail.html'
-    model = ProductDigital
-    form_class = ProductDigitalForm 
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        product = self.get_object()
-        context['form'] = self.form_class(instance=product)
-        context['action'] = 'detail'
-        context['urlDelete'] = reverse('products:productDigitalDelete', args=[product.id])
-        return context
-
-
 
 class ProductDigitalDelete(auth.RequireLoginMixin,MessageValidMixin, generic.DeleteView):
     model = ProductDigital

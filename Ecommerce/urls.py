@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
     path('dashboard/product/', include(('apps.products.dashboard.urls','products'))),
-    path('accouts/', include(('apps.user.dashboard.urls','users'))),
+    path('accouts/', include(('apps.user.dashboard.urls','users'))), 
     path('', include(('apps.core.urls','core')))
 
 ]
@@ -18,6 +18,6 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler400='apps.core.views.handleErrors.handle400'
-handler403='apps.core.views.handleErrors.handle403'
+handler403='apps.core.views.handleErrors.handle403' 
 handler404='apps.core.views.handleErrors.handle404'
 handler500='apps.core.views.handleErrors.handle500'

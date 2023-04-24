@@ -1,20 +1,13 @@
 from django.urls import path, reverse_lazy
 from django.contrib.auth import views as auth_view
 from django.conf import settings
-from apps.user.dashboard.views import CustomLogin
+from apps.user.dashboard.views.CustomLogin import CustomLogin
 from django.contrib.auth.views import LogoutView
 from apps.user.dashboard.forms import LoginFormCustom,ResetPasswordCustomForm
 from apps.user.dashboard import views 
 
 urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='accounts/logout.html'), name = "logout"), 
-
-    #dashboard
-    path('user-list/', views.UserView.as_view(), name='listUsers'),
-    path('user-create/', views.UserCreate.as_view(), name='createUsers'),
-    path('user-detail/<slug:username>/', views.UserDetailView.as_view(), name='detailUsers'),
-    path('user-update/<int:pk>/', views.UserUpdate.as_view(), name='updateUser'),
-    path('user-delete/<int:pk>/', views.UserDelete.as_view(), name='deleteUser'),
 ]
 
 urlpatterns += [

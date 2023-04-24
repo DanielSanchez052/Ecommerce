@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 import environ
+from .adminConfig import JAZZMIN_SETTINGS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -19,6 +20,7 @@ SECRET_KEY = env('SECRET_KEY', default='S#perS3crEt_1122')
 # Application definition
 
 BASE_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -29,6 +31,7 @@ BASE_APPS = [
 
 LOCAL_APPS=[
 'apps.core',
+'apps.basket',
 'apps.products',
 'apps.user',
 'apps.orders',
@@ -150,6 +153,9 @@ EMAIL_NOTIFY = [env("EMAIL_NOTIFY", default="")]
 #cart Config
 CART_ITEM_MAX_QUANTITY=10
 
+
+#Jazzmin Config
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
 #celery and redis
 CELERY_BROKER_URL = 'redis://redis:6379'

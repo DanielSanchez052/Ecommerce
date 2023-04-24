@@ -1,7 +1,9 @@
 from django.db import models
 from apps.core.models import BaseModel
-from apps.products.models import Category, MeasureUnit
 from django.urls import reverse
+
+from .Category import Category
+from .MeasureUnit import MeasureUnit
 
 class Products(BaseModel):
 
@@ -34,6 +36,16 @@ class Products(BaseModel):
     def get_price(self):
         return self.price * (1+self.discount)
     
+    @property
+    def available(self):
+        inventory = 0
+        if self.product_type == 'F':
+            inventory = self.stock.available
+        elif self.product_type == 'D':
+            inventory = self.productdigital.filter(redeem = False).count()
+        
+        return inventory  
+
     def get_absolute_url(self):
         return reverse("products:productDetail", kwargs={"slug": self.slug})
     

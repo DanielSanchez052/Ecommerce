@@ -65,6 +65,12 @@
               <p>Usuarios</p>
             </a>
           </li>
+          <li class="">
+            <a href="{% url 'orders:orders' %}">
+              <i class="tim-icons icon-paper"></i>
+              <p>Ordenes</p>
+            </a>
+          </li>
           {% else %}
           <li class="">
             <a href="{% url 'users:login' %}">
@@ -78,8 +84,6 @@
               <i class="tim-icons icon-send"></i>
               <p>Contactenos</p>
             </a>
-          </li>                  
-        </ul>
-        
+          </li>            
       </div>
     </div>

@@ -17,8 +17,10 @@ class OrderItem(models.Model):
     def __str__(self) -> str:
         return f"{self.quantity} x {self.product.name}"
 
+    
+
     @property
-    def get_total_price(self):
+    def total_price(self):
         return self.price * self.quantity 
 
     class Meta:

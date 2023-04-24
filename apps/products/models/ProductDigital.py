@@ -1,6 +1,8 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
 from apps.core.models import BaseModel
-from apps.products.models.Products import Products
+from .Products import Products
 
 class DigitalManager(models.Manager):
     def get_digital_inventory(self):
@@ -18,12 +20,25 @@ class ProductDigital(BaseModel):
     redeem = models.BooleanField('redeemed',default=False, blank=True, null=True)
     redeem_date = models.DateField('redeemed date', auto_now=False, auto_now_add=False, blank=True, null=True)
     code = models.CharField('code', max_length=100, blank=False, null=False, unique=True)
-    link_redemption = models.CharField('link redemption', max_length=100, blank=True, null=True)
+    link_redemption = models.CharField('link redemption', max_length=100, blank=True, null=True, unique=True)
 
     manage = DigitalManager()
 
     def __str__(self):
         return f'{self.product.name} codigo: {self.code} redimido: {self.redeem}'
+
+    def clean(self):
+        errors = {}
+        if self.product.product_type != 'D':
+            errors.update({
+                "product":"Este Producto no es Digital!!"
+            })
+
+        if len(errors) > 0:
+            raise ValidationError(errors)
+
+    def delete(self, using=None, keep_parents=False):
+        super().delete(using, keep_parents)
 
     class Meta:
         verbose_name='ProductDigital'
