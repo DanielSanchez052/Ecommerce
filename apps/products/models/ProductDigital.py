@@ -27,6 +27,7 @@ class ProductDigital(BaseModel):
     def __str__(self):
         return f'{self.product.name} codigo: {self.code} redimido: {self.redeem}'
 
+
     def clean(self):
         errors = {}
         if self.product.product_type != 'D':
@@ -34,11 +35,14 @@ class ProductDigital(BaseModel):
                 "product":"Este Producto no es Digital!!"
             })
 
+        code_count = ProductDigital.objects.filter(pk=self.id).count()
+        if code_count > 0 and ProductDigital.objects.get(pk=self.id).redeem:
+            errors.update({
+                "redeem":"El codigo digital ya fue redimido por lo tanto no se puede modificar"
+            })            
+
         if len(errors) > 0:
             raise ValidationError(errors)
-
-    def delete(self, using=None, keep_parents=False):
-        super().delete(using, keep_parents)
 
     class Meta:
         verbose_name='ProductDigital'

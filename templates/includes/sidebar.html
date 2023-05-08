@@ -15,21 +15,21 @@
         <ul class="nav">
         {% if request.user.is_authenticated %}
           <li class="">
-            <a href="{% url 'core:home' %}">
+            <a href="">
               <i class="bi bi-house"></i>
               <p>Principal</p>
             </a>
           </li>
 
           <li class="">
-            <a href="{% url 'products:products' %}">
+            <a href="">
               <i class="tim-icons icon-align-center"></i>
               <p>Productos</p>
             </a>
           </li>
 
           <li class="">
-            <a href="{% url 'products:productDigital'%}">
+            <a href="">
               <i class="tim-icons icon-gift-2"></i>
               <p>Codigos Digitales</p>
             </a>
@@ -42,45 +42,45 @@
           </li>-->
 
           <li class="">
-            <a href="{% url 'products:categories'%}">
+            <a href="">
               <i class="tim-icons icon-bullet-list-67"></i>
               <p>Categorias</p>
             </a>
           </li>
           <li class="">
-            <a href="{% url 'products:measureUnits'%}">
+            <a href="">
               <i class="bi bi-rulers"></i>
               <p>Unidades de medida</p>
             </a>
           </li>
           <li class="">
-            <a href="{% url 'products:stock'%}">
+            <a href="">
               <i class="bi bi-box-seam"></i>
               <p>Stock</p>
             </a>
           </li>
           <li class="">
-            <a href="{% url 'users:listUsers' %}">
+            <a href="">
               <i class="tim-icons icon-single-02"></i>
               <p>Usuarios</p>
             </a>
           </li>
           <li class="">
-            <a href="{% url 'orders:orders' %}">
+            <a href="">
               <i class="tim-icons icon-paper"></i>
               <p>Ordenes</p>
             </a>
           </li>
           {% else %}
           <li class="">
-            <a href="{% url 'users:login' %}">
+            <a href="">
               <i class="tim-icons icon-single-02"></i>
               <p>Login</p>
             </a>
           </li> 
           {% endif %}  
           <li class="">
-            <a href="{% url 'core:contact' %}">
+            <a href="">
               <i class="tim-icons icon-send"></i>
               <p>Contactenos</p>
             </a>
