@@ -29,11 +29,15 @@ class OrderAdmin(admin.ModelAdmin):
         OrderItemInline
     ]
     form = OrderForm
+    search_fields = ("user__username", )
+    list_filter = ("is_paid", )    
     list_per_page = 1000
 
 @admin.register(OrderItem)
 class OrderItem(admin.ModelAdmin):
     list_display = ('id','order','product','price','quantity', 'total_price')
+    search_fields = ("order", "price", "quantity", "product__name")
+    list_filter = ("product",)
     list_per_page = 1000
 
 @admin.register(Payment)
